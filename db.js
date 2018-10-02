@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://127.0.0.1/my_database_1', { useNewUrlParser: true })
+mongoose.connect('mongodb://127.0.0.1/my_database_2', { useNewUrlParser: true })
 mongoose.Promise = global.Promise
 
 const db = mongoose.connection

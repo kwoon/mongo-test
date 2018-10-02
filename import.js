@@ -1,10 +1,10 @@
 const db = require('./db')
-const { Sport, generateSport } = require('./sport')
+const { Event, generateEvent } = require('./event')
 const _ = require('lodash')
 
 async function importDatabase() {
-  const sports = _.range(1, 20).map(generateSport)
-  await Sport.insertMany(sports)
+  const events = _.range(1, 10000).map(generateEvent)
+  await Event.insertMany(events)
   db.close()
 }
 

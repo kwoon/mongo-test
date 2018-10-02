@@ -1,24 +1,20 @@
 const db = require('./db')
-const Sport = require('./sport')
+const { Event } = require('./event')
 const _ = require('lodash')
 
-async function getEnabledSports() {
-  return await Sport.find({ enabled: true }).select('name slug')
+async function getSports() {
+  return await Event.distinct('competition.name', { 'sport.name': /^Product/ })
 }
 
-async function getAllEvents() {
-  return await Sport.find({ 'categories.competitions.events.name': /ab/ }).select('categories.competitions.events.name').limit(3)
+async function getSidebar() {
+  const events = await Event.find({ enabled: true }).limit(200)
+  return events.length
 }
 
 async function createRequests() {
-  // console.time('enabled-sports')
-  // const enabledSports = await getEnabledSports()
-  // console.timeEnd('enabled-sports')
-
-  console.time('all events')
-  const allEvents = await getAllEvents()
-  console.log(allEvents)
-  console.timeEnd('all events')
+  console.time('all-sports')
+  console.log(await getSidebar())
+  console.timeEnd('all-sports')
 
   db.close()
 }
